@@ -127,9 +127,15 @@ export default function BotDetail() {
 								Automatisez votre présence sur {bot.name} : planification, DM et analytics.
 							</p>
 							<div className="mt-2 flex flex-wrap gap-4 lg:justify-end">
+								<div className="flex items-center gap-4">
+									<div className="text-right">
+										<div className="text-3xl font-bold text-primary">{bot.price.toFixed(2)}€</div>
+										<div className="text-sm text-muted-foreground">par mois</div>
+									</div>
+								</div>
 								<GlowButton asChild className="group h-12 min-w-[240px] px-8">
 									<Link to="/contact">
-										Lancer mon bot
+										Acheter {bot.name}
 										<ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
 										<span className="noise-overlay" />
 									</Link>
@@ -319,10 +325,16 @@ export default function BotDetail() {
 				<section className="py-16 px-6 bg-gradient-to-b from-background to-muted/10">
 					<div className="container max-w-7xl mx-auto text-center space-y-6">
 						<h2 className="text-3xl lg:text-4xl font-bold">Donnez vie à votre bot dès aujourd'hui</h2>
+						<div className="flex items-center justify-center gap-6 mb-6">
+							<div className="text-center">
+								<div className="text-4xl font-bold text-primary">{bot.price.toFixed(2)}€</div>
+								<div className="text-sm text-muted-foreground">par mois</div>
+							</div>
+						</div>
 						<div className="flex gap-3 justify-center">
 							<Button asChild variant="premium" size="lg" className="group">
 								<Link to="/contact">
-									Commencer maintenant
+									Acheter {bot.name}
 									<ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
 								</Link>
 							</Button>

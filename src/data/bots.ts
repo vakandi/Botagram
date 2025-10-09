@@ -31,6 +31,7 @@ export type BotItem = {
   sceneUrl?: string;
   poster?: string;
   rating?: number;
+  price: number;
 };
 
 export const botsCatalog: BotItem[] = [
@@ -45,6 +46,7 @@ export const botsCatalog: BotItem[] = [
     description:
       "Automatisez votre présence Instagram : planification, DM et analytics.",
     sceneUrl: "https://prod.spline.design/ekOkVWHGNpgmmW3d/scene.splinecode",
+    price: 29.99,
   },
   {
     id: "twitter",
@@ -56,6 +58,7 @@ export const botsCatalog: BotItem[] = [
     Icon: XIcon,
     description:
       "Gérez votre stratégie X avec publication, veille et alertes threads.",
+    price: 19.99,
   },
   {
     id: "youtube",
@@ -67,6 +70,7 @@ export const botsCatalog: BotItem[] = [
     Icon: YouTubeIcon,
     description:
       "Optimisez votre chaîne avec gestion d'uploads et analyses avancées.",
+    price: 39.99,
   },
   {
     id: "tiktok",
@@ -77,6 +81,7 @@ export const botsCatalog: BotItem[] = [
     features: ["Auto-post vidéos", "Trending insights", "File d'attente"],
     Icon: TikTokIcon,
     description: "Maximisez votre reach TikTok avec l'automatisation.",
+    price: 24.99,
   },
   {
     id: "linkedin",
@@ -88,6 +93,7 @@ export const botsCatalog: BotItem[] = [
     Icon: LinkedInIcon,
     description:
       "Développez votre réseau et générez des leads avec des workflows B2B.",
+    price: 49.99,
   },
   {
     id: "telegram",
@@ -100,6 +106,7 @@ export const botsCatalog: BotItem[] = [
     description:
       "Gérez vos canaux Telegram avec des outils de communication avancés.",
     sceneUrl: "loading...",
+    price: 14.99,
   },
   {
     id: "whatsapp",
@@ -112,6 +119,7 @@ export const botsCatalog: BotItem[] = [
     description:
       "Support client et campagnes sur WhatsApp, avec templates et broadcast.",
     sceneUrl: "loading...",
+    price: 34.99,
   },
   {
     id: "discord",
@@ -123,6 +131,7 @@ export const botsCatalog: BotItem[] = [
     Icon: DiscordIcon,
     description:
       "Animez votre communauté avec des bots Discord robustes et modulaires.",
+    price: 9.99,
   },
   {
     id: "snapchat",
@@ -133,6 +142,7 @@ export const botsCatalog: BotItem[] = [
     features: ["Stories", "Lens", "Engagement"],
     Icon: SnapchatIcon,
     description: "Boostez votre présence Snap via contenus et routines.",
+    price: 17.99,
   },
   {
     id: "indeed",
@@ -143,6 +153,7 @@ export const botsCatalog: BotItem[] = [
     features: ["Sourcing", "Screening", "Messages"],
     Icon: IndeedIcon,
     description: "Automatisez votre recrutement avec Indeed (sourcing, screening).",
+    price: 44.99,
   },
   {
     id: "vinted",
@@ -153,6 +164,7 @@ export const botsCatalog: BotItem[] = [
     features: ["Gestion catalogue", "Repricing", "Relist"],
     Icon: VintedIcon,
     description: "Gérez votre boutique Vinted : pricing, relist et analytics.",
+    price: 59.99,
   },
 ];
 

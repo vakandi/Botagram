@@ -45,10 +45,11 @@ const Footer = () => {
       { name: "Tutoriels", href: "#" }
     ],
     legal: [
-      { name: "Conditions d'utilisation", href: "#" },
-      { name: "Politique de confidentialité", href: "#" },
-      { name: "Cookies", href: "#" },
-      { name: "RGPD", href: "#" },
+      { name: "Conditions d'utilisation", href: "/terms" },
+      { name: "Politique de confidentialité", href: "/privacy" },
+      { name: "Politique de remboursement", href: "/refund" },
+      { name: "Conformité RGPD", href: "/gdpr" },
+      { name: "Conformité plateformes", href: "/compliance" },
       { name: "Sécurité", href: "#" },
       { name: "Compliance", href: "#" }
     ]
@@ -137,7 +138,7 @@ const Footer = () => {
             </div>
 
             {/* Social Links */}
-            <div className="flex gap-4">
+            {/* <div className="flex gap-4">
               {[Twitter, Linkedin, Github, Instagram].map((Icon, index) => (
                 <a
                   key={index}
@@ -147,7 +148,7 @@ const Footer = () => {
                   <Icon className="w-5 h-5" />
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           {/* Links Sections */}
@@ -195,7 +196,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
-                  <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </Link>
                 </li>

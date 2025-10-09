@@ -7,19 +7,20 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 const faq = {
   header: {
     eyebrow: "Questions Fréquentes",
-    title: "Tout ce qu’il faut savoir",
+    title: "Tout ce qu'il faut savoir",
     tabs: [
       { id: "general", label: "Général" },
       { id: "paiements", label: "Paiements" },
       { id: "retours", label: "Retours" },
       { id: "remboursements", label: "Remboursements" },
+      { id: "legal", label: "Légal & RGPD" },
     ],
   },
   sections: {
     general: [
       {
         q: "Comment démarrer avec BOTAGRAM ?",
-        a: "Créez un compte, choisissez un bot dans l’armada puis suivez l’assistant de connexion à la plateforme (Instagram, X, YouTube, etc.).",
+        a: "Créez un compte, choisissez un bot dans l'armada puis suivez l'assistant de connexion à la plateforme (Instagram, X, YouTube, etc.).",
       },
       {
         q: "Est‑ce compatible avec plusieurs comptes ?",
@@ -29,15 +30,58 @@ const faq = {
         q: "Mes données sont‑elles sécurisées ?",
         a: "Nous chiffrons les secrets et respectons les politiques des plateformes. Accès par rôles, audit et journaux disponibles.",
       },
+      {
+        q: "Respectez-vous les conditions des plateformes ?",
+        a: "Oui, nos bots utilisent uniquement les API officielles et respectent les limites de taux et les conditions d'utilisation de chaque plateforme. Nous nous engageons à maintenir la conformité avec Instagram, Twitter/X, YouTube, TikTok, LinkedIn, Discord, Telegram, WhatsApp et toutes les plateformes que nous supportons.",
+      },
+      {
+        q: "Que se passe-t-il si une plateforme change ses politiques ?",
+        a: "Nous surveillons activement les changements de politiques des plateformes sociales et mettons à jour nos services en conséquence. Si nécessaire, nous suspendrons temporairement les services pour une plateforme spécifique jusqu'à ce que nous puissions assurer la conformité.",
+      },
     ],
     paiements: [
       { q: "Quels moyens de paiement acceptez‑vous ?", a: "Cartes bancaires, PayPal et virement SEPA. Facturation mensuelle ou annuelle." },
+      { q: "Les prix incluent-ils les taxes ?", a: "Oui, tous nos prix sont indiqués TTC (toutes taxes comprises) conformément à la réglementation française." },
+      { q: "Puis-je changer de plan à tout moment ?", a: "Oui, vous pouvez upgrader ou downgrader votre plan. Les modifications prennent effet au prochain cycle de facturation." },
     ],
     retours: [
-      { q: "Puis‑je annuler à tout moment ?", a: "Oui, l’abonnement est sans engagement. La période en cours reste active jusqu’à son terme." },
+      { q: "Puis‑je annuler à tout moment ?", a: "Oui, l'abonnement est sans engagement. La période en cours reste active jusqu'à son terme." },
+      { q: "Que se passe-t-il si je ferme mon compte ?", a: "Vos données sont supprimées conformément à notre politique de rétention, sauf obligation légale de conservation." },
     ],
     remboursements: [
-      { q: "Proposez‑vous des remboursements ?", a: "Sous 5 à 10 jours ouvrés pour les cas éligibles (voir conditions)." },
+      { q: "Proposez‑vous des remboursements ?", a: "Sous 5 à 10 jours ouvrés pour les cas éligibles (voir notre politique de remboursement détaillée)." },
+      { q: "Puis-je être remboursé si je ne suis pas satisfait ?", a: "Oui, dans les 14 jours suivant la souscription si vous n'avez pas utilisé significativement nos services payants." },
+      { q: "Comment demander un remboursement ?", a: "Contactez notre support à contact@botagram.fr avec votre numéro de commande et la raison de votre demande." },
+    ],
+    legal: [
+      {
+        q: "Comment BOTAGRAM protège-t-il mes données ?",
+        a: "Nous respectons le RGPD avec chiffrement AES-256, contrôles d'accès stricts, et audits de sécurité réguliers. Consultez notre politique de confidentialité.",
+      },
+      {
+        q: "Puis-je exporter mes données ?",
+        a: "Oui, vous avez le droit à la portabilité des données. Contactez contact@botagram.fr pour obtenir une copie de vos données.",
+      },
+      {
+        q: "Comment exercer mes droits RGPD ?",
+        a: "Contactez notre DPO à contact@botagram.fr ou utilisez votre espace client. Nous répondons dans un délai d'un mois.",
+      },
+      {
+        q: "BOTAGRAM est-il conforme au RGPD ?",
+        a: "Oui, nous sommes entièrement conformes au RGPD avec un DPO désigné, des procédures de sécurité strictes et le respect de tous vos droits.",
+      },
+      {
+        q: "Que se passe-t-il en cas de violation de données ?",
+        a: "Nous notifions la CNIL dans les 72h et vous informons si nécessaire. Des mesures correctives sont immédiatement mises en place.",
+      },
+      {
+        q: "BOTAGRAM est-il conforme aux politiques des plateformes sociales ?",
+        a: "Oui, nous sommes entièrement conformes aux politiques de toutes les plateformes que nous supportons. Nous utilisons exclusivement leurs API officielles et respectons leurs conditions d'utilisation, limites de taux et politiques de contenu.",
+      },
+      {
+        q: "Que se passe-t-il si mon compte est suspendu par une plateforme ?",
+        a: "Nous ne sommes pas responsables des suspensions imposées par les plateformes sociales. Cependant, nous vous aidons à comprendre les raisons et à mettre en place des mesures préventives pour éviter de futures suspensions.",
+      },
     ],
   },
 };
@@ -101,7 +145,7 @@ const FAQPage = () => {
           </div>
 
           <Tabs value={tab} onValueChange={(v) => { setTab(v); setPage(1); }} className="w-full">
-            <TabsList className="grid grid-cols-4 max-w-xl mx-auto mb-8">
+            <TabsList className="grid grid-cols-5 max-w-2xl mx-auto mb-8">
               {faq.header.tabs.map((t) => (
                 <TabsTrigger key={t.id} value={t.id}>{t.label}</TabsTrigger>
               ))}
@@ -184,6 +228,16 @@ const FAQPage = () => {
               <Accordion type="single" collapsible className="divide-y divide-border/20 bg-card/60 rounded-2xl border border-border/40">
                 {(tab === "remboursements" ? pageSlice : faq.sections.remboursements).map((it, idx) => (
                   <AccordionItem key={idx} value={`rf-${idx}`}>
+                    <AccordionTrigger>{it.q}</AccordionTrigger>
+                    <AccordionContent>{it.a}</AccordionContent>
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </TabsContent>
+            <TabsContent value="legal">
+              <Accordion type="single" collapsible className="divide-y divide-border/20 bg-card/60 rounded-2xl border border-border/40">
+                {(tab === "legal" ? pageSlice : faq.sections.legal).map((it, idx) => (
+                  <AccordionItem key={idx} value={`l-${idx}`}>
                     <AccordionTrigger>{it.q}</AccordionTrigger>
                     <AccordionContent>{it.a}</AccordionContent>
                   </AccordionItem>

@@ -13,7 +13,7 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const Contact = lazy(() => import("./pages/Contact"));
 const Discord = lazy(() => import("./pages/Discord"));
 const BotDetail = lazy(() => import("./pages/BotDetail"));
-const TermsOfService = lazy(() => import("./pages/TermsOfService"));
+import TermsOfService from "./pages/TermsOfService";
 const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy"));
 const GDPRCompliance = lazy(() => import("./pages/GDPRCompliance"));

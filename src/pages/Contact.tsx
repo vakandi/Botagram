@@ -18,6 +18,9 @@ const Contact = () => {
     email: "",
     company: "",
     message: "",
+    features: "",
+    budget: "",
+    timeline: "",
     consent: false,
     newsletter: false,
   });
@@ -44,19 +47,19 @@ const Contact = () => {
       <Header />
       
       <div className="pt-16">
-        <section className="pt-24 pb-24 px-6">
+      <section className="pt-24 pb-24 px-6">
           <div className="container max-w-6xl mx-auto grid lg:grid-cols-2 gap-10 items-start">
-            <div className="space-y-6">
+          <div className="space-y-6">
               <div className="space-y-4">
                 <Badge variant="outline" className="border-primary/40 bg-primary/10 text-primary">
                   Contact
                 </Badge>
-                <h1 className="text-4xl lg:text-5xl font-bold">
-                  <span className="text-foreground">Contactez</span>{" "}
-                  <span className="bg-gradient-primary bg-clip-text text-transparent">notre équipe</span>
-                </h1>
-                <p className="text-muted-foreground">
-                  Dites‑nous en plus sur votre projet d'automatisation. Nous revenons vers vous sous 24h.
+            <h1 className="text-4xl lg:text-5xl font-bold">
+              <span className="text-foreground">Contactez</span>{" "}
+              <span className="bg-gradient-primary bg-clip-text text-transparent">notre équipe</span>
+            </h1>
+            <p className="text-muted-foreground">
+                  Dites‑nous en plus sur votre projet d'automatisation. Nous revenons vers vous sous 24h avec un devis personnalisé et un lien de paiement sécurisé pour les fonctionnalités dont vous avez besoin.
                 </p>
               </div>
 
@@ -82,6 +85,48 @@ const Contact = () => {
                       <div className="w-2 h-2 rounded-full bg-primary"></div>
                       <span className="text-muted-foreground">RGPD : contact@botagram.fr</span>
                     </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card/80 backdrop-blur border-border/50">
+                <CardHeader>
+                  <CardTitle>Processus de paiement</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <p className="text-muted-foreground text-sm">
+                    Après analyse de votre demande, nous vous fournissons :
+                  </p>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3 text-sm">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                      <div>
+                        <span className="font-medium text-foreground">Devis personnalisé</span>
+                        <p className="text-muted-foreground">Prix détaillé selon vos besoins spécifiques</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 text-sm">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                      <div>
+                        <span className="font-medium text-foreground">Lien de paiement sécurisé</span>
+                        <p className="text-muted-foreground">Paiement en ligne via notre plateforme sécurisée</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3 text-sm">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2"></div>
+                      <div>
+                        <span className="font-medium text-foreground">Accès immédiat</span>
+                        <p className="text-muted-foreground">Déploiement des fonctionnalités après paiement</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-primary/10 p-4 rounded-lg">
+                    <p className="text-sm text-muted-foreground">
+                      <strong>Paiements acceptés :</strong> Cartes bancaires, PayPal, Virement SEPA<br />
+                      <strong>Sécurité :</strong> Transactions chiffrées et conformes PCI DSS<br />
+                      <strong>Facturation :</strong> Factures automatiques et reçus disponibles
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -139,6 +184,38 @@ const Contact = () => {
                     />
                   </div>
 
+                  <div className="space-y-2">
+                    <Label htmlFor="features">Fonctionnalités souhaitées</Label>
+                    <Textarea
+                      id="features"
+                      value={formData.features}
+                      onChange={(e) => handleInputChange("features", e.target.value)}
+                      placeholder="Ex: Bot Instagram pour posts automatiques, API Twitter pour analytics, développement sur mesure..."
+                      className="min-h-20"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="budget">Budget approximatif</Label>
+                      <Input
+                        id="budget"
+                        value={formData.budget}
+                        onChange={(e) => handleInputChange("budget", e.target.value)}
+                        placeholder="Ex: 500€/mois, 2000€ projet"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="timeline">Délai souhaité</Label>
+                      <Input
+                        id="timeline"
+                        value={formData.timeline}
+                        onChange={(e) => handleInputChange("timeline", e.target.value)}
+                        placeholder="Ex: 2 semaines, 1 mois"
+                      />
+                    </div>
+                  </div>
+
                   <div className="space-y-4">
                     <div className="flex items-start space-x-2">
                       <Checkbox
@@ -168,9 +245,9 @@ const Contact = () => {
                   </div>
 
                   <Button type="submit" className="w-full h-11 bg-gradient-primary text-white font-medium">
-                    Envoyer le message
+                    Demander un devis et lien de paiement
                   </Button>
-                </form>
+            </form>
               </CardContent>
             </Card>
           </div>
@@ -178,14 +255,66 @@ const Contact = () => {
 
         <section className="py-16 px-6 bg-gradient-to-b from-muted/10 to-background">
           <div className="container max-w-6xl mx-auto">
-            <div className="relative rounded-3xl overflow-hidden border border-primary/20 shadow-elevated">
-              <div className="w-full" style={{ aspectRatio: "16 / 9" }}>
-                <Spline scene={splineScenes.contact} className="w-full h-full" />
-              </div>
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-primary/15 to-transparent" />
+            <div className="text-center space-y-4 mb-12">
+              <Badge variant="outline" className="border-primary/40 bg-primary/10 text-primary">
+                Processus de paiement
+              </Badge>
+              <h2 className="text-3xl lg:text-4xl font-bold">
+                <span className="text-foreground">Paiements sécurisés</span>{" "}
+                <span className="bg-gradient-primary bg-clip-text text-transparent">via notre plateforme</span>
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Tous les paiements sont traités de manière sécurisée via notre plateforme de paiement intégrée, 
+                conformément aux standards de sécurité les plus élevés.
+              </p>
             </div>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="bg-card/80 backdrop-blur border-border/50">
+                <CardContent className="p-6 text-center space-y-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
+                    <span className="text-2xl">📋</span>
+                  </div>
+                  <h3 className="font-semibold text-foreground">1. Devis personnalisé</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Analyse de vos besoins et création d'un devis détaillé avec prix transparents
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card/80 backdrop-blur border-border/50">
+                <CardContent className="p-6 text-center space-y-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
+                    <span className="text-2xl">💳</span>
+                  </div>
+                  <h3 className="font-semibold text-foreground">2. Lien de paiement</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Réception d'un lien de paiement sécurisé pour effectuer votre transaction en ligne
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="bg-card/80 backdrop-blur border-border/50">
+                <CardContent className="p-6 text-center space-y-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto">
+                    <span className="text-2xl">🚀</span>
+                  </div>
+                  <h3 className="font-semibold text-foreground">3. Déploiement</h3>
+                  <p className="text-muted-foreground text-sm">
+                    Accès immédiat aux fonctionnalités et début de la configuration de vos bots
+                  </p>
+                </CardContent>
+              </Card>
           </div>
-        </section>
+
+            <div className="mt-12 relative rounded-3xl overflow-hidden border border-primary/20 shadow-elevated">
+            <div className="w-full" style={{ aspectRatio: "16 / 9" }}>
+              <Spline scene={splineScenes.contact} className="w-full h-full" />
+            </div>
+            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-primary/15 to-transparent" />
+          </div>
+        </div>
+      </section>
         
         <Footer />
       </div>

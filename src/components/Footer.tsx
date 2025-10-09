@@ -21,28 +21,29 @@ const Footer = () => {
 
   const footerLinks = {
     product: [
-      { name: "Bots Instagram", href: "#" },
-      { name: "Bots Twitter", href: "#" },
-      { name: "Bots YouTube", href: "#" },
-      { name: "Bots TikTok", href: "#" },
-      { name: "Custom Development", href: "#" },
-      { name: "API Documentation", href: "#" }
+      { name: "Bots Instagram", href: "/bots#instagram" },
+      { name: "Bots Twitter/X", href: "/bots#twitter" },
+      { name: "Bots YouTube", href: "/bots#youtube" },
+      { name: "Bots TikTok", href: "/bots#tiktok" },
+      { name: "Bots LinkedIn", href: "/bots#linkedin" },
+      { name: "Développement sur mesure", href: "/contact" },
+      { name: "Documentation API", href: "/docs" }
     ],
     company: [
-      { name: "À propos", href: "#" },
-      { name: "Blog", href: "#" },
-      { name: "Carrières", href: "#" },
-      { name: "Presse", href: "#" },
-      { name: "Partenaires", href: "#" },
-      { name: "Contact", href: "#" }
+      { name: "À propos", href: "/about" },
+      { name: "Blog", href: "/blog" },
+      { name: "Carrières", href: "/careers" },
+      { name: "Presse", href: "/press" },
+      { name: "Partenaires", href: "/partners" },
+      { name: "Contact", href: "/contact" }
     ],
     support: [
-      { name: "Centre d'aide", href: "#" },
-      { name: "Documentation", href: "#" },
-      { name: "Status", href: "#" },
-      { name: "Communauté", href: "#" },
-      { name: "Webinaires", href: "#" },
-      { name: "Tutoriels", href: "#" }
+      { name: "FAQ", href: "/faq" },
+      { name: "Centre d'aide", href: "/help" },
+      { name: "Documentation", href: "/docs" },
+      { name: "Discord", href: "/discord" },
+      { name: "Status", href: "/status" },
+      { name: "Tutoriels", href: "/tutorials" }
     ],
     legal: [
       { name: "Conditions d'utilisation", href: "/terms" },
@@ -50,8 +51,7 @@ const Footer = () => {
       { name: "Politique de remboursement", href: "/refund" },
       { name: "Conformité RGPD", href: "/gdpr" },
       { name: "Conformité plateformes", href: "/compliance" },
-      { name: "Sécurité", href: "#" },
-      { name: "Compliance", href: "#" }
+      { name: "Sécurité", href: "/security" }
     ]
   };
 
@@ -157,7 +157,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.product.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.name.includes('Bots') ? '/bots#all' : link.name.includes('API') ? '/docs' : '/'} className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -170,7 +170,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.name === 'Contact' ? '/contact' : '/'} className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </Link>
                 </li>
@@ -183,7 +183,7 @@ const Footer = () => {
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.name === 'Documentation' ? '/docs' : '/'} className="text-muted-foreground hover:text-primary transition-colors">
+                  <Link to={link.href} className="text-muted-foreground hover:text-primary transition-colors">
                     {link.name}
                   </Link>
                 </li>

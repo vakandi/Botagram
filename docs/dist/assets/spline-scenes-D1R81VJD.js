@@ -1,1 +1,0 @@
-const e="https://prod.spline.design/SJ2RaQ8z2fzjE6jD/scene.splinecode",s="https://prod.spline.design/ekOkVWHGNpgmmW3d/scene.splinecode",n="https://prod.spline.design/G7OcUWgZJZZUfMEn/scene.splinecode",c="https://prod.spline.design/SJ2RaQ8z2fzjE6jD/scene.splinecode",o={hero:e,botDetailBackground:s,contact:n,fallback:c};export{o as s};

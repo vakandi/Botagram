@@ -1,6 +1,7 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "BOTAGRAM",
+  "short_name": "BOTAGRAM",
+  "description": "Plateforme d'automatisation premium conforme aux politiques des plateformes sociales",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -13,9 +14,16 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
+    },
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
     }
   ],
-  "theme_color": "#7c7c7c",
-  "background_color": "#2c2b2b",
-  "display": "standalone"
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/"
 }

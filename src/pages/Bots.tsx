@@ -321,7 +321,6 @@ const BotsPage = () => {
                        </div>
                        <div className="text-right">
                          <div className="text-2xl font-bold text-primary">{b.price.toFixed(2)}€</div>
-                         <div className="text-xs text-muted-foreground">par mois</div>
                        </div>
                      </div>
                    </CardHeader>

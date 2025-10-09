@@ -35,24 +35,7 @@ const PrivacyPolicy = () => {
               </p>
             </div>
 
-            <Card className="bg-card/80 backdrop-blur border-border/50">
-              <CardHeader>
-                <CardTitle className="text-2xl">1. Responsable du traitement</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground">
-                  BOTAGRAM, société française, est responsable du traitement de vos données personnelles.
-                </p>
-                <div className="bg-muted/30 p-4 rounded-lg">
-                  <p className="text-sm text-muted-foreground">
-                    <strong>BOTAGRAM</strong><br />
-                    Adresse : Paris, France<br />
-                    Email : contact@botagram.fr<br />
-                    Délégué à la protection des données : contact@botagram.fr
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+          
 
             <Card className="bg-card/80 backdrop-blur border-border/50 mt-6">
               <CardHeader>

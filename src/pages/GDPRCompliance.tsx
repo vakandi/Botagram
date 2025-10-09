@@ -59,27 +59,7 @@ const GDPRCompliance = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-card/80 backdrop-blur border-border/50 mt-6">
-              <CardHeader>
-                <CardTitle className="text-2xl">2. Responsable du traitement</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground">
-                  BOTAGRAM agit en tant que responsable du traitement de vos données personnelles.
-                </p>
-                
-                <div className="bg-muted/30 p-4 rounded-lg">
-                  <h4 className="font-semibold text-foreground mb-2">Informations légales</h4>
-                  <p className="text-muted-foreground text-sm">
-                    <strong>Raison sociale :</strong> BOTAGRAM<br />
-                    <strong>Forme juridique :</strong> Société française<br />
-                    <strong>Adresse :</strong> Paris, France<br />
-                    <strong>Email :</strong> contact@botagram.fr<br />
-                    <strong>Délégué à la protection des données :</strong> contact@botagram.fr
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+    
 
             <Card className="bg-card/80 backdrop-blur border-border/50 mt-6">
               <CardHeader>

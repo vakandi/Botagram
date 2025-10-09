@@ -1,0 +1,73 @@
+/* Material 3 tokens scoped to .m3 to avoid overriding global theme */
+.m3 {
+  /* Colors */
+  --surface: #0B0F14;
+  --surface-variant: #0E131A;
+  --on-surface: #E6F0FF;
+  --on-surface-subtle: #C7D2E6;
+  --divider: rgba(255,255,255,0.08);
+
+  --primary: #22D3EE;
+  --primary-container: #0EA5B7;
+  --on-primary: #05161C;
+
+  --secondary: #FF00E6;
+  --secondary-container: #B100A4;
+  --tertiary: #8B5CF6;
+  --on-accent: #130B1A;
+
+  --card-stroke: rgba(255,255,255,0.10);
+  --card-bg: rgba(255,255,255,0.05);
+  --card-bg-hover: rgba(255,255,255,0.07);
+
+  --success: #22C55E;
+  --warning: #FFBF00;
+  --danger: #FF4D4D;
+
+  /* State layer opacities */
+  --state-hover: 0.08;
+  --state-focus: 0.12;
+  --state-pressed: 0.12;
+  --state-dragged: 0.16;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 20px;
+  --radius-xl: 24px;
+  --radius-pill: 1000px;
+
+  /* Shadows */
+  --shadow-elev1: 0 1px 2px rgba(0,0,0,0.36), 0 1px 1px rgba(0,0,0,0.18);
+  --shadow-elev2: 0 6px 16px rgba(0,0,0,0.40), 0 2px 6px rgba(0,0,0,0.24);
+  --shadow-elev3: 0 16px 40px rgba(0,0,0,0.44), 0 6px 16px rgba(0,0,0,0.28);
+
+  /* Blur */
+  --blur-soft: 8px;
+  --blur-glow: 16px;
+  --blur-halo: 28px;
+
+  /* Motion */
+  --ease-std: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-emph: cubic-bezier(0.2, 0.0, 0, 1);
+  --dur-fast: 150ms;
+  --dur-base: 220ms;
+  --dur-slow: 320ms;
+
+  /* Typography tokens (for convenience) */
+  --font-family: Inter, ui-sans-serif, system-ui;
+  --h1-size: 44px; --h1-line: 54px; --h1-weight: 700; --h1-letter: 0.2px;
+  --h2-size: 28px; --h2-line: 34px; --h2-weight: 700; --h2-letter: 0.2px;
+  --subtitle-size: 18px; --subtitle-line: 28px; --subtitle-weight: 500;
+  --body-size: 15px; --body-line: 24px; --body-weight: 400;
+  --caption-size: 13px; --caption-line: 20px; --caption-weight: 400;
+}
+
+@media (prefers-color-scheme: dark) {
+  .m3 {
+    background: var(--surface);
+    color: var(--on-surface);
+  }
+}
+
+

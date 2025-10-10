@@ -100,8 +100,9 @@ const CustomBots = () => {
           </h2>
           
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Automatisation intelligente des réseaux sociaux, gestion d'audience, et optimisation des algorithmes. 
-            Maximisez votre présence digitale avec nos solutions sur-mesure pour chaque plateforme.
+            Botagram est une plateforme SaaS appartenant à COBOU LLC, société enregistrée dans le Wyoming (USA). 
+            Nous développons et distribuons des logiciels d'automatisation pour les réseaux sociaux, basés sur les API officielles de ces plateformes. 
+            Tous nos produits sont des outils numériques — vendus en paiement unique, sans abonnement ni intervention humaine.
           </p>
         </div>
 
@@ -183,7 +184,7 @@ const CustomBots = () => {
               Prêt pour du <span className="bg-gradient-primary bg-clip-text text-transparent">sur-mesure</span> ?
             </h3>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Discutons de votre projet. Consultation gratuite pour évaluer la faisabilité et le budget.
+              Après paiement, le client reçoit un lien de téléchargement automatique au format .zip, contenant le logiciel et ses instructions d'installation.
             </p>
           </div>
 

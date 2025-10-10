@@ -173,6 +173,12 @@ export default function BotDetail() {
 								</div>
 								<span className="text-sm">Optimisé pour {bot.name}</span>
 							</div>
+							<div className="mt-4 p-4 bg-primary/10 rounded-lg border border-primary/20">
+								<p className="text-sm text-muted-foreground">
+									💡 <strong>Important :</strong> Botagram ne propose pas de prestations manuelles ou de services humains. 
+									Chaque produit est un logiciel autonome, délivré automatiquement après achat.
+								</p>
+							</div>
 						</div>
 						{/* Spline en arrière-plan → suppression de la carte latérale */}
 					</div>

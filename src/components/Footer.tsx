@@ -117,23 +117,23 @@ const Footer = () => {
             </div>
             
             <p className="text-muted-foreground leading-relaxed">
-              La plateforme d'automatisation premium pour professionnels. 
-              Bots prêts et développement sur mesure.
+              Botagram est une plateforme SaaS appartenant à COBOU LLC, société enregistrée dans le Wyoming (USA). 
+              Nous développons et distribuons des logiciels d'automatisation pour les réseaux sociaux.
             </p>
 
             {/* Contact Info */}
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <MapPin className="w-4 h-4 text-accent" />
-                <span>Paris, France & Remote</span>
+                <span>COBOU LLC, Wyoming, USA</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                <Phone className="w-4 h-4 text-accent" />
-                <span>+33 1 23 45 67 89</span>
+                <Mail className="w-4 h-4 text-accent" />
+                <span>support@botagram.fr</span>
               </div>
               <div className="flex items-center gap-3 text-sm text-muted-foreground">
                 <Clock className="w-4 h-4 text-accent" />
-                <span>Lun-Ven 9h-18h CET</span>
+                <span>Support disponible 24/7</span>
               </div>
             </div>
 

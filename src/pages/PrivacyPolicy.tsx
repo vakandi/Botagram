@@ -313,7 +313,7 @@ const PrivacyPolicy = () => {
                 
                 <div className="bg-primary/10 p-4 rounded-lg">
                   <p className="text-sm text-muted-foreground">
-                    <strong>Pour exercer vos droits :</strong> Contactez-nous à contact@botagram.fr 
+                    <strong>Pour exercer vos droits :</strong> Contactez-nous à support@botagram.fr 
                     ou via votre espace client. Nous répondrons dans un délai d'un mois.
                   </p>
                 </div>
@@ -392,7 +392,7 @@ const PrivacyPolicy = () => {
                   <div className="bg-muted/30 p-4 rounded-lg">
                     <h4 className="font-semibold text-foreground mb-2">Nous contacter directement</h4>
                     <p className="text-muted-foreground text-sm">
-                      Email : contact@botagram.fr<br />
+                      Email : support@botagram.fr<br />
                       Nous nous engageons à répondre dans les meilleurs délais.
                     </p>
                   </div>
@@ -435,9 +435,9 @@ const PrivacyPolicy = () => {
                 </p>
                 <div className="bg-muted/30 p-4 rounded-lg">
                   <p className="text-sm text-muted-foreground">
-                    <strong>Email :</strong> contact@botagram.fr<br />
-                    <strong>Délégué à la protection des données :</strong> contact@botagram.fr<br />
-                    <strong>Adresse :</strong> BOTAGRAM, Paris, France<br />
+                    <strong>Email :</strong> support@botagram.fr<br />
+                    <strong>Délégué à la protection des données :</strong> support@botagram.fr<br />
+                    <strong>Société :</strong> COBOU LLC, Wyoming, USA<br />
                     <strong>Via notre page de contact :</strong> <a href="/contact" className="text-primary hover:underline">/contact</a>
                   </p>
                 </div>

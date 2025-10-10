@@ -271,8 +271,8 @@ const TermsOfService = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <p className="text-muted-foreground">
-                  Ces conditions sont régies par le droit français. Tout litige sera soumis à la compétence 
-                  exclusive des tribunaux français.
+                  Ces conditions sont régies par le droit américain (Wyoming). Tout litige sera soumis à la compétence 
+                  exclusive des tribunaux du Wyoming, USA.
                 </p>
                 <p className="text-muted-foreground">
                   Si une disposition de ces conditions est jugée invalide, les autres dispositions resteront en vigueur.
@@ -289,8 +289,8 @@ const TermsOfService = () => {
                   Pour toute question concernant ces conditions d'utilisation, contactez-nous :
                 </p>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-                  <li>Email : contact@botagram.fr</li>
-                  <li>Adresse : BOTAGRAM, Paris, France</li>
+                  <li>Email : support@botagram.fr</li>
+                  <li>Société : COBOU LLC, Wyoming, USA</li>
                   <li>Via notre <a href="/contact" className="text-primary hover:underline">page de contact</a></li>
                 </ul>
               </CardContent>

@@ -40,9 +40,9 @@ const faq = {
       },
     ],
     paiements: [
-      { q: "Quels moyens de paiement acceptez‑vous ?", a: "Cartes bancaires, PayPal et virement SEPA. Facturation mensuelle ou annuelle." },
+      { q: "Quels moyens de paiement acceptez‑vous ?", a: "Pour le moment, notre système de paiement en ligne est en phase d'intégration. Les achats peuvent actuellement être effectués sur demande, en nous contactant directement. Nous envoyons un lien de paiement sécurisé manuellement (ex : Dodo Payments, Paddle ou Wise). Une fois les passerelles de paiement activées (Revolut, Dodo Payments, Paddle, Wise), les paiements seront instantanés et automatisés depuis notre site." },
       { q: "Les prix incluent-ils les taxes ?", a: "Oui, tous nos prix sont indiqués TTC (toutes taxes comprises) conformément à la réglementation française." },
-      { q: "Puis-je changer de plan à tout moment ?", a: "Oui, vous pouvez upgrader ou downgrader votre plan. Les modifications prennent effet au prochain cycle de facturation." },
+      { q: "Comment se déroule l'achat d'un logiciel ?", a: "Après paiement, le client reçoit un lien de téléchargement automatique au format .zip, contenant le logiciel et ses instructions d'installation. Tous nos produits sont des outils numériques vendus en paiement unique, sans abonnement ni intervention humaine." },
     ],
     retours: [
       { q: "Puis‑je annuler à tout moment ?", a: "Oui, l'abonnement est sans engagement. La période en cours reste active jusqu'à son terme." },

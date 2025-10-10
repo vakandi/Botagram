@@ -28,7 +28,7 @@ const About = () => {
       <HelmetProvider>
         <Helmet>
           <title>À propos | BOTAGRAM</title>
-          <meta name="description" content="Découvrez Botagram - logiciels d'automatisation digitale pour réseaux sociaux. Développé par COBOU AGENCY LLC. CEO: Wael Bousfira." />
+          <meta name="description" content="Découvrez Botagram - logiciels d'automatisation digitale pour réseaux sociaux." />
           <link rel="canonical" href="/about" />
         </Helmet>
       </HelmetProvider>
@@ -95,39 +95,6 @@ const About = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-card/80 backdrop-blur border-border/50">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-highlight text-white flex items-center justify-center">
-                      <Users className="w-5 h-5" />
-                    </div>
-                    <CardTitle className="text-2xl">Équipe dirigeante</CardTitle>
-                  </div>
-                  <CardDescription>
-                    Fondateurs et dirigeants de COBOU AGENCY LLC.
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-sm text-muted-foreground"><strong>CEO & Co-Fondateur :</strong> Wael Bousfira</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-sm text-muted-foreground"><strong>Email :</strong> wael@cobou.agency</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-sm text-muted-foreground"><strong>Support :</strong> contact@botagram.fr</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500" />
-                      <span className="text-sm text-muted-foreground"><strong>Site web :</strong> https://botagram.fr</span>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
             </div>
 
             {/* Business Overview */}

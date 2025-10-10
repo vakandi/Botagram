@@ -40,7 +40,7 @@ const Contact = () => {
       <HelmetProvider>
         <Helmet>
           <title>Contact | BOTAGRAM</title>
-          <meta name="description" content="Contactez Botagram pour vos logiciels d'automatisation digitale. Développé par COBOU AGENCY LLC. CEO: Wael Bousfira." />
+          <meta name="description" content="Contactez Botagram pour vos logiciels d'automatisation digitale. Développé par COBOU AGENCY LLC." />
           <link rel="canonical" href="/contact" />
         </Helmet>
       </HelmetProvider>
@@ -76,14 +76,6 @@ const Contact = () => {
                     <div className="flex items-center gap-3 text-sm">
                       <div className="w-2 h-2 rounded-full bg-primary"></div>
                       <span className="text-muted-foreground">Société : COBOU AGENCY LLC</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-primary"></div>
-                      <span className="text-muted-foreground">CEO : Wael Bousfira</span>
-                    </div>
-                    <div className="flex items-center gap-3 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-primary"></div>
-                      <span className="text-muted-foreground">Localisation : Wyoming, USA</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm">
                       <div className="w-2 h-2 rounded-full bg-primary"></div>

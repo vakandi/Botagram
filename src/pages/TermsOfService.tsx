@@ -289,8 +289,8 @@ const TermsOfService = () => {
                   Pour toute question concernant ces conditions d'utilisation, contactez-nous :
                 </p>
                 <ul className="list-disc list-inside text-muted-foreground space-y-2 ml-4">
-                  <li>Email : support@botagram.fr</li>
-                  <li>Société : COBOU LLC, Wyoming, USA</li>
+                  <li>Email : contact@botagram.fr</li>
+                  <li>Société : COBOU AGENCY LLC, Wyoming, USA</li>
                   <li>Via notre <a href="/contact" className="text-primary hover:underline">page de contact</a></li>
                 </ul>
               </CardContent>

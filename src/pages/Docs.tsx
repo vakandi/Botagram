@@ -182,15 +182,15 @@ const Docs = () => {
 
             {/* Platform-specific Documentation */}
             <div className="mb-16">
-              <div className="text-center space-y-4 mb-12">
+          <div className="text-center space-y-4 mb-12">
                 <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
                   Logiciels par Plateforme
                 </h2>
                 <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
                   Chaque logiciel est spécialement conçu pour une plateforme sociale spécifique, 
                   utilisant ses API officielles et respectant ses politiques.
-                </p>
-              </div>
+            </p>
+          </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
@@ -238,7 +238,7 @@ const Docs = () => {
                       <li>• Installation : Automatique avec script d'installation</li>
                       <li>• Configuration : Interface graphique intuitive</li>
                       <li>• Support : Documentation complète incluse</li>
-                    </ul>
+              </ul>
                   </div>
                   <div className="space-y-4">
                     <h4 className="font-semibold text-foreground">Sécurité & Conformité</h4>
@@ -247,7 +247,7 @@ const Docs = () => {
                       <li>• Chiffrement des données sensibles</li>
                       <li>• Respect des limites de taux</li>
                       <li>• Conformité aux politiques des plateformes</li>
-                    </ul>
+              </ul>
                   </div>
                 </div>
               </CardContent>
@@ -278,9 +278,9 @@ const Docs = () => {
                   <Link to="/faq">Questions fréquentes</Link>
                 </GlowButton>
               </div>
-            </div>
           </div>
-        </section>
+        </div>
+      </section>
         
         <Footer />
       </div>

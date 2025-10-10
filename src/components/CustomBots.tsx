@@ -99,11 +99,7 @@ const CustomBots = () => {
             </span>
           </h2>
           
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Botagram est une plateforme SaaS appartenant à COBOU LLC, société enregistrée dans le Wyoming (USA). 
-            Nous développons et distribuons des logiciels d'automatisation pour les réseaux sociaux, basés sur les API officielles de ces plateformes. 
-            Tous nos produits sont des outils numériques — vendus en paiement unique, sans abonnement ni intervention humaine.
-          </p>
+        
         </div>
 
         {/* Capabilities Grid */}

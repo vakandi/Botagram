@@ -40,7 +40,7 @@ const Contact = () => {
       <HelmetProvider>
         <Helmet>
           <title>Contact | BOTAGRAM</title>
-          <meta name="description" content="Parlez à un expert BOTAGRAM pour votre projet d'automatisation." />
+          <meta name="description" content="Contactez Botagram pour vos logiciels d'automatisation digitale. Développé par COBOU AGENCY LLC. CEO: Wael Bousfira." />
           <link rel="canonical" href="/contact" />
         </Helmet>
       </HelmetProvider>
@@ -59,7 +59,7 @@ const Contact = () => {
               <span className="bg-gradient-primary bg-clip-text text-transparent">notre équipe</span>
             </h1>
             <p className="text-muted-foreground">
-                  Dites‑nous en plus sur votre projet d'automatisation. Nous revenons vers vous sous 24h avec un devis personnalisé et un lien de paiement sécurisé pour les fonctionnalités dont vous avez besoin.
+                  Contactez COBOU AGENCY LLC (Botagram) pour vos logiciels d'automatisation digitale. Nous revenons vers vous sous 24h avec un devis personnalisé et un lien de paiement sécurisé pour les logiciels dont vous avez besoin.
                 </p>
               </div>
 
@@ -75,15 +75,19 @@ const Contact = () => {
                     </div>
                     <div className="flex items-center gap-3 text-sm">
                       <div className="w-2 h-2 rounded-full bg-primary"></div>
-                      <span className="text-muted-foreground">Téléphone : +33 1 23 45 67 89</span>
+                      <span className="text-muted-foreground">Société : COBOU AGENCY LLC</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm">
                       <div className="w-2 h-2 rounded-full bg-primary"></div>
-                      <span className="text-muted-foreground">Horaires : Lun-Ven 9h-18h CET</span>
+                      <span className="text-muted-foreground">CEO : Wael Bousfira</span>
                     </div>
                     <div className="flex items-center gap-3 text-sm">
                       <div className="w-2 h-2 rounded-full bg-primary"></div>
-                      <span className="text-muted-foreground">RGPD : contact@botagram.fr</span>
+                      <span className="text-muted-foreground">Localisation : Wyoming, USA</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-2 h-2 rounded-full bg-primary"></div>
+                      <span className="text-muted-foreground">Support : 24/7 disponible</span>
                     </div>
                   </div>
                 </CardContent>

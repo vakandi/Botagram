@@ -18,6 +18,7 @@ const PrivacyPolicy = lazy(() => import("./pages/PrivacyPolicy"));
 const RefundPolicy = lazy(() => import("./pages/RefundPolicy"));
 const GDPRCompliance = lazy(() => import("./pages/GDPRCompliance"));
 const PlatformCompliance = lazy(() => import("./pages/PlatformCompliance"));
+const About = lazy(() => import("./pages/About"));
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -65,6 +66,7 @@ const App = () => {
               <Route path="/refund" element={<RefundPolicy />} />
               <Route path="/gdpr" element={<GDPRCompliance />} />
               <Route path="/compliance" element={<PlatformCompliance />} />
+              <Route path="/about" element={<About />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

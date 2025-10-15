@@ -14,6 +14,21 @@ from pydantic import BaseModel, Field, validator
 from dependencies import app
 from routers.smm_panel import _load_services_settings, _build_exception_index, _compute_price
 
+# Bot pricing for Botagram
+BOT_PRICES = {
+    "Instagram": 29.99,
+    "Twitter": 19.99,
+    "X (Twitter)": 19.99,
+    "YouTube": 39.99,
+    "TikTok": 24.99,
+    "LinkedIn": 49.99,
+    "Telegram": 14.99,
+    "WhatsApp": 34.99,
+    "Discord": 9.99,
+    "Snapchat": 17.99,
+    "Indeed": 44.99,
+    "Vinted": 19.99,
+}
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api/guest", tags=["guest-actions"])
@@ -178,7 +193,19 @@ def _compute_unit_price(
 
 
 async def _quote_single(conn, payload: GuestSingleItem, pricing: Dict[str, Any]) -> GuestQuoteLine:
-    # Check for flagged services (same logic as orders.py)
+    # Check if this is a bot purchase (by service_id)
+    if payload.service_id in BOT_PRICES:
+        # Use frontend price for bot purchases
+        unit_price = BOT_PRICES[payload.service_id]
+        total = unit_price * payload.quantity
+        return GuestQuoteLine(
+            label=f"{payload.service_id} Bot - Automatisation",
+            quantity=payload.quantity,
+            unit_price=unit_price,
+            total=round(total, 2),
+        )
+    
+    # Original logic for real SMM services
     try:
         flag = await conn.fetchrow(
             """
@@ -661,9 +688,16 @@ async def _create_dodo_checkout(
     
     if order_details.get("order_type") == "single":
         single = order_details.get("single", {})
+        service_id = single.get('service_id', 'Unknown')
         quantity = single.get('quantity', 'N/A')
-        description = f"Digital Software - {quantity} items"
-        product_name = f"Digital Software - {quantity} items"
+        
+        # Check if it's a bot purchase
+        if service_id in BOT_PRICES:
+            description = f"Bot d'automatisation {service_id} - Fonctionnalités avancées"
+            product_name = f"{service_id} Bot - Automatisation"
+        else:
+            description = f"Digital Software - {quantity} items"
+            product_name = f"Digital Software - {quantity} items"
     
     # Step 1: Create a unique product for this guest order with fixed price
     try:

@@ -20,6 +20,7 @@ interface GuestCheckoutRequest {
     currency: string;
     single: {
       service_id: string;
+      panel_id?: number;
       quantity: number;
       target_url: string;
       comments?: string;
@@ -43,7 +44,7 @@ interface GuestCheckoutResponse {
 }
 
 class PaymentService {
-  private baseUrl = 'https://paiement.botagram.fr/api/payments/dodo';
+  private baseUrl = 'https://paiement.botagram.fr/api/guest';
   private successUrl = 'https://paiement.botagram.fr/dodo/payment/success';
   private failedUrl = 'https://paiement.botagram.fr/dodo/payment/failed';
 
@@ -56,6 +57,7 @@ class PaymentService {
           currency: request.currency || 'EUR',
           single: {
             service_id: request.botName, // Use bot name as service_id
+            panel_id: undefined, // Optional field
             quantity: 1,
             target_url: `https://botagram.fr/bots/${request.botId}`,
             comments: `Bot d'automatisation pour ${request.botName}`,
@@ -67,7 +69,7 @@ class PaymentService {
         contact_email: request.contactEmail,
       };
 
-      const response = await fetch(`${this.baseUrl}/create-link`, {
+      const response = await fetch(`${this.baseUrl}/checkout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -16,6 +16,7 @@ import { Search, ArrowRight, X } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { PaymentButton } from "@/components/PaymentButton";
 
 const categories = [
   { id: "all", label: "Tous" },
@@ -334,12 +335,15 @@ const BotsPage = () => {
                       ))}
                     </ul>
                      <div className="flex justify-center">
-                       <GlowButton asChild className="group text-sm px-4 py-2">
-                         <Link to={`/bots/${b.slug}`}>
-                           Acheter {b.name}
-                           <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
-                         </Link>
-                       </GlowButton>
+                       <PaymentButton
+                         botId={b.id}
+                         botName={b.name}
+                         price={b.price}
+                         currency="EUR"
+                         variant="glow"
+                         size="sm"
+                         className="group text-sm px-4 py-2"
+                       />
                      </div>
                   </CardContent>
                 </Card>

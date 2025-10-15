@@ -56,7 +56,7 @@ const About = () => {
             </div>
 
             {/* Company Details */}
-            <div className="grid lg:grid-cols-2 gap-8 mb-16">
+            <div className="mb-16">
               <Card className="bg-card/80 backdrop-blur border-border/50">
                 <CardHeader>
                   <div className="flex items-center gap-3 mb-4">
@@ -94,7 +94,6 @@ const About = () => {
                   </div>
                 </CardContent>
               </Card>
-
             </div>
 
             {/* Business Overview */}

@@ -27,6 +27,7 @@ import {
 	ChevronDown
 } from "lucide-react";
 import { GlowButton } from "@/components/ui/glow-button";
+import { PaymentButton } from "@/components/PaymentButton";
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import BotsInstagramSection from "@/components/sections/BotsInstagramSection";
 
@@ -132,13 +133,15 @@ export default function BotDetail() {
 										<div className="text-3xl font-bold text-primary">{bot.price.toFixed(2)}€</div>
 									</div>
 								</div>
-								<GlowButton asChild className="group h-12 min-w-[240px] px-8">
-									<Link to="/contact">
-										Acheter {bot.name}
-										<ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-										<span className="noise-overlay" />
-									</Link>
-								</GlowButton>
+								<PaymentButton
+									botId={bot.id}
+									botName={bot.name}
+									price={bot.price}
+									currency="EUR"
+									variant="glow"
+									size="lg"
+									className="group h-12 min-w-[240px] px-8"
+								/>
 								{isInstagramPage ? (
 									<DropdownMenu>
 										<DropdownMenuTrigger asChild>
@@ -336,12 +339,15 @@ export default function BotDetail() {
 								</div>
 							</div>
 						<div className="flex gap-3 justify-center">
-							<Button asChild variant="premium" size="lg" className="group">
-								<Link to="/contact">
-									Acheter {bot.name}
-									<ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
-								</Link>
-							</Button>
+							<PaymentButton
+								botId={bot.id}
+								botName={bot.name}
+								price={bot.price}
+								currency="EUR"
+								variant="premium"
+								size="lg"
+								className="group"
+							/>
 							<Button asChild variant="glass" size="lg">
 								<Link to="/contact?intent=demo">Demander une démo personnalisée</Link>
 							</Button>

@@ -608,13 +608,25 @@ async def _create_dodo_product_for_guest(
     # Convert amount to cents (minor currency units)
     price_in_cents = int(round(amount * 100))
     
+    # Dodo only supports USD and INR, so convert EUR to USD
+    if currency.upper() == "EUR":
+        # Convert EUR to USD (approximate rate, you might want to use a real exchange rate API)
+        usd_amount = amount * 1.08  # 1 EUR ≈ 1.08 USD
+        usd_price_in_cents = int(round(usd_amount * 100))
+        display_currency = "USD"
+        display_amount = usd_amount
+    else:
+        usd_price_in_cents = price_in_cents
+        display_currency = currency.upper()
+        display_amount = amount
+    
     # Build product payload
     product_payload = {
         "name": name,
-        "description": description or f"{name} - ${amount:.2f}",
+        "description": description or f"{name} - ${display_amount:.2f}",
         "price": {
-            "currency": currency.upper(),
-            "price": price_in_cents,
+            "currency": display_currency,
+            "price": usd_price_in_cents,
             "discount": 0,  # Required field - no discount for fixed price products
             "type": "one_time_price",
             "pay_what_you_want": False,  # Fixed price
@@ -700,10 +712,14 @@ async def _create_dodo_checkout(
             product_name = f"Digital Software - {quantity} items"
     
     # Step 1: Create a unique product for this guest order with fixed price
+    # Convert EUR to USD for Dodo (which only supports USD and INR)
+    dodo_currency = "USD" if currency.upper() == "EUR" else currency
+    dodo_amount = amount * 1.08 if currency.upper() == "EUR" else amount
+    
     try:
         product_id = await _create_dodo_product_for_guest(
-            amount=amount,
-            currency=currency,
+            amount=dodo_amount,
+            currency=dodo_currency,
             name=product_name,
             description=description,
         )
@@ -895,18 +911,24 @@ async def _update_guest_payment(
     is_final: bool,
 ) -> Dict[str, Any]:
     payment_state = "completed" if is_final else "pending"
+    
+    # Extract payment_id from payload if available
+    payment_id = payload.get("payment_id")
+    
     await conn.execute(
         """
         UPDATE guest_orders
         SET payment_state = $2,
             payment_reference = COALESCE(payment_reference, $3),
-            payment_details = $4,
+            payment_id = COALESCE(payment_id, $4),
+            payment_details = $5,
             updated_at = NOW()
         WHERE guest_order_id = $1
         """,
         guest_order_id,
         payment_state,
         provider_reference,
+        payment_id,
         json.dumps(payload),
     )
     await conn.execute(

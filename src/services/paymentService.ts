@@ -45,8 +45,8 @@ interface GuestCheckoutResponse {
 
 class PaymentService {
   private baseUrl = 'https://paiement.botagram.fr/api/guest';
-  private successUrl = 'https://paiement.botagram.fr/dodo/payment/success';
-  private failedUrl = 'https://paiement.botagram.fr/dodo/payment/failed';
+  private successUrl = 'https://paiement.botagram.fr/payment/success';
+  private failedUrl = 'https://paiement.botagram.fr/payment/failed';
 
   async createPaymentLink(request: PaymentRequest): Promise<PaymentResponse> {
     try {

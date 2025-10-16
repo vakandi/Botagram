@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { botsCatalog } from "@/data/bots";
 import Spline from "@splinetool/react-spline";
-import splineScenes from "@/data/spline-scenes.json";
+import { useSplineOptimizedMulti } from "@/hooks/useSplineOptimized";
+import { detectDeviceCapabilities, getOptimalQuality } from "@/constants/splineConfig";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Link, useParams, Navigate } from "react-router-dom";
 import {
@@ -88,7 +89,49 @@ export default function BotDetail() {
 
 	const Icon = bot.Icon as React.ComponentType<{ className?: string }>;
 	const isInstagramPage = bot.slug === "instagram";
-	// The Instagram dropdown shows predefined items instead of listing bots
+	
+	// Device capabilities and performance detection
+	const deviceCapabilities = detectDeviceCapabilities();
+	const optimalQuality = getOptimalQuality(deviceCapabilities);
+	
+	// Setup multiple Spline scenes with optimized loading
+	const splineScenes = useSplineOptimizedMulti([
+		{
+			sceneId: 'botDetailBackground',
+			sceneUrl: 'https://prod.spline.design/ekOkVWHGNpgmmW3d/scene.splinecode',
+			priority: 'high',
+			quality: 'medium', // Reduced quality for background
+			preload: true,
+		},
+		{
+			sceneId: 'business',
+			sceneUrl: 'https://prod.spline.design/fh9YYxywXzTsu6Cu/scene.splinecode',
+			priority: 'low',
+			quality: 'low', // Low quality for use cases
+			preload: false,
+		},
+		{
+			sceneId: 'trading',
+			sceneUrl: 'https://prod.spline.design/4kzC5L82ahMrl12f/scene.splinecode',
+			priority: 'low',
+			quality: 'low',
+			preload: false,
+		},
+		{
+			sceneId: 'support',
+			sceneUrl: 'https://prod.spline.design/7IfHMAFJmENIn3cx/scene.splinecode',
+			priority: 'low',
+			quality: 'low',
+			preload: false,
+		},
+		{
+			sceneId: 'marketing',
+			sceneUrl: 'https://prod.spline.design/ZFgaEiIkr-pXS5ve/scene.splinecode',
+			priority: 'low',
+			quality: 'low',
+			preload: false,
+		},
+	]);
 
 	return (
 		<main className="min-h-screen bg-background">
@@ -106,9 +149,26 @@ export default function BotDetail() {
 				{/* Hero */}
 				<section className="relative overflow-hidden isolate py-20 lg:py-28 px-6 min-h-[80vh] md:min-h-[90vh]">
 					{/* Background Spline full-bleed */}
-					<div className="absolute inset-0 z-0 pointer-events-none" aria-hidden="true">
+					<div 
+						className="absolute inset-0 z-0 pointer-events-none" 
+						style={{
+							contain: 'layout style paint',
+							transform: 'translateZ(0)', // GPU acceleration
+						}}
+						aria-hidden="true"
+					>
 						<div className="absolute inset-0">
-							<Spline style={{ display: "block", width: "100%", height: "100%" }} scene={splineScenes.botDetailBackground} />
+							{splineScenes.getSceneState('botDetailBackground').shouldRender ? (
+								<Spline 
+									style={{ 
+										display: "block", 
+										width: "100%", 
+										height: "100%",
+										willChange: 'opacity, transform',
+									}} 
+									scene="https://prod.spline.design/ekOkVWHGNpgmmW3d/scene.splinecode" 
+								/>
+							) : null}
 						</div>
 						{/* subtle overlays to improve readability */}
 						<div className="absolute inset-0 bg-gradient-to-b from-background/10 via-transparent to-background/30" />
@@ -291,19 +351,60 @@ export default function BotDetail() {
 							}}></div>
 						</div>
 						<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-							{defaultUseCases.map(({ title, desc, scene }) => (
-								<Card key={title} className="bg-card/80 backdrop-blur border-border/50">
-									<CardHeader>
-										<CardTitle className="text-base">{title}</CardTitle>
-										<CardDescription className="whitespace-pre-line">{desc}</CardDescription>
-									</CardHeader>
-									<CardContent>
-										<div className="w-full h-32 rounded-lg overflow-hidden">
-											<Spline scene={scene} style={{ width: "100%", height: "100%" }} />
-										</div>
-									</CardContent>
-								</Card>
-							))}
+							{defaultUseCases.map(({ title, desc, scene }) => {
+								const sceneId = scene.includes('fh9YYxywXzTsu6Cu') ? 'business' :
+									scene.includes('4kzC5L82ahMrl12f') ? 'trading' :
+									scene.includes('7IfHMAFJmENIn3cx') ? 'support' :
+									scene.includes('ZFgaEiIkr-pXS5ve') ? 'marketing' : 'unknown';
+								
+								const sceneState = splineScenes.getSceneState(sceneId);
+								
+								return (
+									<Card 
+										key={title} 
+										className="bg-card/80 backdrop-blur border-border/50"
+										style={{
+											contain: 'layout style paint',
+											contentVisibility: 'auto',
+										}}
+									>
+										<CardHeader>
+											<CardTitle className="text-base">{title}</CardTitle>
+											<CardDescription className="whitespace-pre-line">{desc}</CardDescription>
+										</CardHeader>
+										<CardContent>
+											<div 
+												className="w-full h-32 rounded-lg overflow-hidden relative"
+												style={{
+													transform: 'translateZ(0)', // GPU acceleration
+												}}
+											>
+												{sceneState.shouldRender ? (
+													<Spline 
+														scene={scene} 
+														style={{ 
+															width: "100%", 
+															height: "100%",
+															willChange: 'opacity, transform',
+														}} 
+													/>
+												) : (
+													<div className="w-full h-full bg-gradient-to-br from-primary/10 to-highlight/10 flex items-center justify-center">
+														<div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary"></div>
+													</div>
+												)}
+												
+												{/* Loading overlay */}
+												{sceneState.isLoading && (
+													<div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+														<div className="bg-white/90 rounded px-2 py-1 text-xs">Loading...</div>
+													</div>
+												)}
+											</div>
+										</CardContent>
+									</Card>
+								);
+							})}
 						</div>
 					</div>
 				</section>

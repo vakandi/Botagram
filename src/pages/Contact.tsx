@@ -1,5 +1,6 @@
 import Spline from "@splinetool/react-spline";
-import splineScenes from "@/data/spline-scenes.json";
+import { useSplineOptimized } from "@/hooks/useSplineOptimized";
+import { detectDeviceCapabilities, getOptimalQuality } from "@/constants/splineConfig";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -13,6 +14,24 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 const Contact = () => {
+  // Device capabilities and performance detection
+  const deviceCapabilities = detectDeviceCapabilities();
+  const optimalQuality = getOptimalQuality(deviceCapabilities);
+  
+  // Optimized Spline scene for contact page
+  const {
+    isLoaded,
+    shouldRender,
+    fallbackVisible,
+    containerRef,
+  } = useSplineOptimized({
+    sceneId: 'contact',
+    sceneUrl: 'https://prod.spline.design/G7OcUWgZJZZUfMEn/scene.splinecode',
+    priority: 'low', // Low priority since it's below the fold
+    quality: optimalQuality,
+    preload: false, // Don't preload since it's at bottom of page
+  });
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -303,12 +322,40 @@ const Contact = () => {
               </Card>
           </div>
 
-            <div className="mt-12 relative rounded-3xl overflow-hidden border border-primary/20 shadow-elevated">
-            <div className="w-full" style={{ aspectRatio: "16 / 9" }}>
-              <Spline scene={splineScenes.contact} className="w-full h-full" />
+            <div 
+              className="mt-12 relative rounded-3xl overflow-hidden border border-primary/20 shadow-elevated"
+              style={{
+                contain: 'layout style paint',
+                transform: 'translateZ(0)', // GPU acceleration
+              }}
+            >
+              <div 
+                ref={containerRef}
+                className="w-full relative" 
+                style={{ 
+                  aspectRatio: "16 / 9",
+                  contentVisibility: 'auto',
+                }}
+              >
+                {shouldRender ? (
+                  <Spline 
+                    scene="https://prod.spline.design/G7OcUWgZJZZUfMEn/scene.splinecode" 
+                    className="w-full h-full"
+                    style={{
+                      willChange: 'opacity, transform',
+                    }}
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary/10 to-highlight/10 flex items-center justify-center">
+                    <div className="text-center space-y-4">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+                      <p className="text-muted-foreground">Loading 3D scene...</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-primary/15 to-transparent" />
             </div>
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-primary/15 to-transparent" />
-          </div>
         </div>
       </section>
         

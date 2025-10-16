@@ -1,0 +1,148 @@
+/* Spline 3D Performance Optimizations */
+
+/* GPU acceleration and containment for Spline containers */
+.spline-container {
+  contain: layout style paint;
+  transform: translateZ(0);
+  will-change: opacity, transform;
+  content-visibility: auto;
+}
+
+/* Optimize for reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .spline-container {
+    display: none;
+  }
+  
+  .spline-fallback {
+    display: block;
+  }
+}
+
+/* Default fallback is hidden */
+.spline-fallback {
+  display: none;
+}
+
+/* Loading states with smooth transitions */
+.spline-loading {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.spline-loading.loaded {
+  opacity: 1;
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-width: 768px) {
+  .spline-container {
+    /* Reduce quality on mobile */
+    filter: brightness(1.1) contrast(0.9);
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .spline-container {
+    /* Slightly reduce quality on high DPI to maintain performance */
+    transform: translateZ(0) scale(0.98);
+  }
+}
+
+/* Dark mode optimizations */
+@media (prefers-color-scheme: dark) {
+  .spline-fallback {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+  }
+}
+
+/* Focus and accessibility */
+.spline-container:focus-within {
+  outline: 2px solid rgba(59, 130, 246, 0.5);
+  outline-offset: 2px;
+}
+
+/* Loading animation optimizations */
+.spline-spinner {
+  animation: spline-spin 1s linear infinite;
+  will-change: transform;
+}
+
+@keyframes spline-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Intersection observer optimizations */
+.spline-observer-target {
+  /* Ensure proper stacking context */
+  position: relative;
+  z-index: 1;
+}
+
+/* Memory management - hide off-screen scenes */
+.spline-offscreen {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* WebGL context loss handling */
+.spline-context-lost {
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+/* Removed debug performance indicators for production */
+
+/* Quality presets CSS classes */
+.spline-quality-low {
+  filter: contrast(0.8) brightness(1.1);
+}
+
+.spline-quality-medium {
+  filter: contrast(0.9) brightness(1.05);
+}
+
+.spline-quality-high {
+  filter: none;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 480px) {
+  .spline-container {
+    /* Further reduce quality on small screens */
+    filter: brightness(1.2) contrast(0.8) saturate(0.9);
+  }
+}
+
+/* Battery saver mode detection */
+@media (prefers-reduced-data: reduce) {
+  .spline-container {
+    display: none;
+  }
+  
+  .spline-fallback {
+    display: block;
+  }
+}
+
+/* Print styles */
+@media print {
+  .spline-container {
+    display: none;
+  }
+  
+  .spline-fallback {
+    display: block;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    text-align: center;
+    padding: 20px;
+  }
+}

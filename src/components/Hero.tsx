@@ -4,21 +4,46 @@ import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight, Bot, Zap, Globe } from "lucide-react";
 import Spline from "@splinetool/react-spline";
-import splineScenes from "@/data/spline-scenes.json";
-import { useEffect, useRef, useState } from "react";
+import { useSplineOptimized } from "@/hooks/useSplineOptimized";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { detectDeviceCapabilities, getOptimalQuality } from "@/constants/splineConfig";
+import { shouldReduceMotion } from "@/utils/performanceMonitor";
 
 const Hero = () => {
-  // Loading state for Spline scene
-  const [isSplineLoaded, setIsSplineLoaded] = useState(false);
-  const [showLoadingImage, setShowLoadingImage] = useState(true);
+  // Device capabilities and performance detection
+  const deviceCapabilities = detectDeviceCapabilities();
+  const optimalQuality = getOptimalQuality(deviceCapabilities);
+  const prefersReducedMotion = shouldReduceMotion();
+  
+  // Spline optimization hook
+  const {
+    isLoaded: isSplineLoaded,
+    shouldRender: shouldRenderSpline,
+    fallbackVisible: showLoadingImage,
+    containerRef,
+    loadScene,
+  } = useSplineOptimized({
+    sceneId: 'hero',
+    sceneUrl: 'https://prod.spline.design/kxmX2KuGcoMRRFmp/scene.splinecode',
+    priority: 'critical',
+    quality: optimalQuality,
+    fallbackImage: '/upscalemedia-transformed.jpeg',
+    preload: true,
+    onLoad: () => {
+      // Delay hiding the loading image to allow smooth transition
+      setTimeout(() => {
+        setShowLoadingImage(false);
+      }, 500);
+    },
+  });
   
   // Cursor → head follow (only the head, not the whole scene)
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const splineRef = useRef<any>(null);
   const headRef = useRef<any>(null);
   const targetYaw = useRef(0);   // left/right (y axis)
   const targetPitch = useRef(0); // up/down (x axis)
   const rafRef = useRef<number | null>(null);
+  const lastMouseMoveTime = useRef(0);
 
   const onLoad = (spline: any) => {
     splineRef.current = spline;
@@ -36,38 +61,73 @@ const Hero = () => {
     }, 500); // 0.5 second delay
   };
 
-  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  // Throttled mouse move handler for better performance
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    // Skip if reduced motion is preferred or low-end device
+    if (prefersReducedMotion || deviceCapabilities.memory < 4) return;
+    
+    // Throttle to max 60fps
+    const now = performance.now();
+    if (now - lastMouseMoveTime.current < 16.67) return; // ~60fps
+    lastMouseMoveTime.current = now;
+
     const el = containerRef.current;
     if (!el) return;
+    
     const rect = el.getBoundingClientRect();
     const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;  // -1 .. 1
     const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1; // -1 .. 1
-    const maxYaw = 0.22;   // ~12.5° (légèrement réduit)
-    const maxPitch = 0.14; // ~8°  (légèrement réduit)
+    
+    // Adjust sensitivity based on device capabilities
+    const sensitivity = deviceCapabilities.memory < 6 ? 0.5 : 1;
+    const maxYaw = 0.22 * sensitivity;   // ~12.5° (légèrement réduit)
+    const maxPitch = 0.14 * sensitivity; // ~8°  (légèrement réduit)
+    
     targetYaw.current = nx * maxYaw;
     targetPitch.current = -ny * maxPitch;
-  };
+  }, [prefersReducedMotion, deviceCapabilities.memory]);
 
   const onMouseLeave = () => {
     targetYaw.current = 0;
     targetPitch.current = 0;
   };
 
+  // Optimized animation loop with requestIdleCallback
   useEffect(() => {
+    if (prefersReducedMotion) return;
+
     const tick = () => {
       const head = headRef.current;
-      if (head) {
+      if (head && !prefersReducedMotion) {
         // Lerp towards target for smooth tracking
         const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
         head.rotation ??= { x: 0, y: 0, z: 0 };
-        head.rotation.y = lerp(head.rotation.y || 0, targetYaw.current, 0.18);
-        head.rotation.x = lerp(head.rotation.x || 0, targetPitch.current, 0.18);
+        
+        // Adjust lerp speed based on device performance
+        const lerpSpeed = deviceCapabilities.memory < 6 ? 0.12 : 0.18;
+        head.rotation.y = lerp(head.rotation.y || 0, targetYaw.current, lerpSpeed);
+        head.rotation.x = lerp(head.rotation.x || 0, targetPitch.current, lerpSpeed);
       }
-      rafRef.current = requestAnimationFrame(tick);
+      
+      // Use requestIdleCallback for better performance on low-end devices
+      if (deviceCapabilities.memory < 6) {
+        if ('requestIdleCallback' in window) {
+          (window as any).requestIdleCallback(() => {
+            rafRef.current = requestAnimationFrame(tick);
+          });
+        } else {
+          rafRef.current = requestAnimationFrame(tick);
+        }
+      } else {
+        rafRef.current = requestAnimationFrame(tick);
+      }
     };
+    
     rafRef.current = requestAnimationFrame(tick);
-    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
-  }, []);
+    return () => { 
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [prefersReducedMotion, deviceCapabilities.memory]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -101,23 +161,36 @@ const Hero = () => {
       <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-highlight/10 opacity-50 pointer-events-none" />
       
       {/* Secondary 3D model overlay (capture mouse, but prevent Spline from handling pointer) */}
-      <div ref={containerRef} onMouseMove={onMouseMove} onMouseLeave={onMouseLeave} className="absolute inset-0 z-0" aria-hidden="true">
+      <div 
+        ref={containerRef} 
+        onMouseMove={onMouseMove} 
+        onMouseLeave={onMouseLeave} 
+        className="absolute inset-0 z-0 will-change-transform" 
+        style={{
+          contain: 'layout style paint',
+          transform: 'translateZ(0)', // GPU acceleration
+        }}
+        aria-hidden="true"
+      >
         <div className="absolute inset-0">
-          <Spline
-            onLoad={onLoad}
-            style={{ 
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%", 
-              height: "100%", 
-              pointerEvents: "none",
-              opacity: isSplineLoaded ? 1 : 0,
-              transition: "opacity 2s cubic-bezier(0.4, 0, 0.2, 1)",
-              transform: "scale(1)"
-            }}
-            scene="https://prod.spline.design/kxmX2KuGcoMRRFmp/scene.splinecode"
-          />
+          {shouldRenderSpline ? (
+            <Spline
+              onLoad={onLoad}
+              style={{ 
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%", 
+                height: "100%", 
+                pointerEvents: "none",
+                opacity: isSplineLoaded ? 1 : 0,
+                transition: "opacity 2s cubic-bezier(0.4, 0, 0.2, 1)",
+                transform: "scale(1)",
+                willChange: "opacity, transform",
+              }}
+              scene="https://prod.spline.design/kxmX2KuGcoMRRFmp/scene.splinecode"
+            />
+          ) : null}
         </div>
       </div>
       

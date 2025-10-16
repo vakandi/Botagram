@@ -29,12 +29,6 @@ const Hero = () => {
     quality: optimalQuality,
     fallbackImage: '/upscalemedia-transformed.jpeg',
     preload: true,
-    onLoad: () => {
-      // Delay hiding the loading image to allow smooth transition
-      setTimeout(() => {
-        setShowLoadingImage(false);
-      }, 500);
-    },
   });
   
   // Cursor → head follow (only the head, not the whole scene)
@@ -52,13 +46,7 @@ const Hero = () => {
       const obj = spline.findObjectByName?.(name);
       if (obj) { headRef.current = obj; break; }
     }
-    // Mark Spline as loaded
-    setIsSplineLoaded(true);
-    
-    // Delay hiding the loading image to allow smooth transition
-    setTimeout(() => {
-      setShowLoadingImage(false);
-    }, 500); // 0.5 second delay
+    // The hook handles loading state automatically
   };
 
   // Throttled mouse move handler for better performance
